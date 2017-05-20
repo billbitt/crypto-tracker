@@ -1,0 +1,26 @@
+{
+  "name": "crypto-tracker",
+  "version": "1.0.0",
+  "description": "a node application that you can use to track the status of your crypto portfolio",
+  "main": "currentValues.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/billbitt/crypto-tracker.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/billbitt/crypto-tracker/issues"
+  },
+  "homepage": "https://github.com/billbitt/crypto-tracker#readme",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "mysql": "^2.13.0",
+    "request": "^2.81.0",
+    "sequelize": "^3.30.4"
+  }
+}
