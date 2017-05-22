@@ -2,7 +2,7 @@ var request = require('request');
 var db = require("../models");
 
 // export functionality
-module.exports = function(updateSpeed){
+module.exports = function(){
 	/* BTC */
 	// define a function to get the btc price update 
 	function updateBtcPrice(){
@@ -22,13 +22,10 @@ module.exports = function(updateSpeed){
 			//console.log({result: 'response received', statusCode: response.statusCode, body: body});
 			//console.log(JSON.parse(body).data.amount)
 			// store the value in the database
-			db.CryptoValue.update({
+			db.CryptoValue.create({
 				value: JSON.parse(body).data.amount,
-			}, {
-				where: {
-					valueFrom: "BTC",
-					valueTo: "USD"
-				}
+				valueFrom: "BTC",
+				valueTo: "USD"
 			}).then(function(data){
 				console.log("btc update complete");
 				return;
@@ -37,8 +34,8 @@ module.exports = function(updateSpeed){
 		// make the request 
 		request.get(options, callback);
 	}
-	// set a 'worker' to make the request every 'updateSpeed' seconds
-	setInterval(updateBtcPrice, updateSpeed * 1000);
+	// update btc
+	updateBtcPrice();
 	
 	/* ETH */
 	// define a function to get the eth price update 
@@ -58,13 +55,10 @@ module.exports = function(updateSpeed){
 			};
 			//console.log({result: 'response received', statusCode: response.statusCode, body: body});
 			//console.log(JSON.parse(body).data.amount)
-			db.CryptoValue.update({
+			db.CryptoValue.create({
 				value: JSON.parse(body).data.amount,
-			}, {
-				where: {
-					valueFrom: "ETH",
-					valueTo: "USD"
-				}
+				valueFrom: "ETH",
+				valueTo: "USD"
 			}).then(function(data){
 				console.log("eth update complete");
 				return;
@@ -73,8 +67,8 @@ module.exports = function(updateSpeed){
 		// make the request
 		request.get(options, callback);
 	}
-	// set a 'worker' to make the call every so many seconds 
-	setInterval(updateEthPrice, updateSpeed * 1000);
+	//update the price
+	updateEthPrice();
 	
 	/* ALT COINS */
 	// define a function to get the price update 
@@ -101,13 +95,10 @@ module.exports = function(updateSpeed){
 					var valueFrom = propTitle.substring(underscoreIndex + 1);
 					var valueTo = propTitle.substring(0, underscoreIndex);
 					//console.log (valueTo, value, valueFrom);
-					db.CryptoValue.update({
+					db.CryptoValue.create({
 						value: value,
-					}, {
-						where: {
-							valueFrom: valueFrom,
-							valueTo: valueTo
-						}
+						valueFrom: valueFrom,
+						valueTo: valueTo
 					}).then(function(data){
 						return;
 					});
@@ -119,7 +110,7 @@ module.exports = function(updateSpeed){
 		// make the request
 		request.get(options, callback);
 	}
-	// set a 'worker' to make the call every so many seconds 
-	setInterval(updateAltsPrice, updateSpeed * 1000);
+	//update the prices
+	updateAltsPrice()
 
 }

@@ -30,8 +30,8 @@ require('./workers/updatePrices.js')(updateSpeed);
 // start server
 db.sequelize.sync({ force: true}).then(function(){
 	app.listen(PORT, function() {
-		//create seeds testing
-    	require("./seeders/createCryptoValues.js").createSeeds();
+		//create seeds
+    	require("./seeders/getInitialValues.js")();
 		// log that the port is open
 		console.log("Listening on PORT " + PORT);
 	});
